@@ -7,6 +7,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import android.util.Log;
 
+import com.parse.Parse;
+import com.parse.ParseInstallation;
+import com.parse.PushService;
+
 public class ParsePushNotification extends CordovaPlugin {
 	public static final String ACTION_INITIALIZE = "initialize";
     public static final String ACTION_SUBSCRIBE = "subscribe";
