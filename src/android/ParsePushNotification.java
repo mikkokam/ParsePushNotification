@@ -5,10 +5,9 @@ import org.apache.cordova.CordovaPlugin;
 import org.json.JSONObject;
 import org.json.JSONArray;
 import org.json.JSONException;
-import android.app.Activity;
-import android.content.Intent;
+import android.util.Log;
 
-public class SamplePlugin extends CordovaPlugin {
+public class ParsePushNotification extends CordovaPlugin {
     public static final String ACTION_SUBSCRIBE = "subscribe";
     
     @Override
@@ -17,7 +16,7 @@ public class SamplePlugin extends CordovaPlugin {
             if (ACTION_SUBSCRIBE.equals(action)) { 
                JSONObject arg_object = args.getJSONObject(0);
 			   String channel = arg_object.getString("channel");
-				Log.i(channel);
+				Log.i(channel, channel);
                callbackContext.success();
                return true;
             }
