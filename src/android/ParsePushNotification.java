@@ -56,7 +56,7 @@ public class ParsePushNotification extends CordovaPlugin {
                 try {               
 					JSONObject arg_object = args.getJSONObject(0);
 			  		String channel = arg_object.getString("channel");
-					Log.i(channel, channel);
+					PushService.subscribe(cordova.getActivity(), channel, cordova.getActivity().getClass());
                     callbackContext.success();
                 } catch (JSONException e) {
                     callbackContext.error("JSONException");
