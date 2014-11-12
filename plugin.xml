@@ -19,6 +19,7 @@
 			</feature>
 		</config-file>
 		<config-file target="AndroidManifest.xml" parent="/manifest/application">
+			<activity android:name="$PACKAGE_NAME.CordovaApp" android:exported="true"/>
 			<service android:name="com.parse.PushService" />
 			<receiver android:name="com.parse.ParseBroadcastReceiver">
 				<intent-filter>
