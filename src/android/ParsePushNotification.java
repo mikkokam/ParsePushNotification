@@ -39,8 +39,8 @@ public class ParsePushNotification extends CordovaPlugin {
             public void run() {
                 try {
 					JSONObject arg_object = args.getJSONObject(0);
-                    String appId = args.getString(0);
-                    String clientKey = args.getString(1);
+                    String appId = arg_object.getString("App_ID");
+                    String clientKey = arg_object.getString("Client_Key");
                     Parse.initialize(cordova.getActivity(), appId, clientKey);
                     callbackContext.success();
                 } catch (JSONException e) {
