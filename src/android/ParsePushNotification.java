@@ -8,6 +8,7 @@ import org.json.JSONException;
 
 import com.parse.Parse;
 import com.parse.ParsePush;
+import com.parse.PushService;
 
 public class ParsePushNotification extends CordovaPlugin {
 	public static final String ACTION_INITIALIZE = "initialize";
