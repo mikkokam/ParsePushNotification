@@ -21,6 +21,7 @@
             </feature>
         </config-file>
 		<source-file src="src/android/parse-sdk/Parse-1.7.1.jar" target-dir="libs" framework="true" />
+		<source-file src="src/android/parse-sdk/bolts-android-1.1.3.jar" target-dir="libs" framework="true" />
         <source-file src="src/android/ParsePushNotification.java" target-dir="src/jerry/shen/plugin" />      
      </platform>          
 </plugin>
