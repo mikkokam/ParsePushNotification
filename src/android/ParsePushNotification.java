@@ -5,6 +5,7 @@ import org.apache.cordova.CordovaPlugin;
 import org.json.JSONObject;
 import org.json.JSONArray;
 import org.json.JSONException;
+
 import android.util.Log;
 
 import com.parse.Parse;
@@ -36,12 +37,14 @@ public class ParsePushNotification extends CordovaPlugin {
 	
 	private void initialize(final CallbackContext callbackContext, final JSONArray args) {
         cordova.getThreadPool().execute(new Runnable() {
-            public void run() {
+            @SuppressWarnings("deprecation")
+			public void run() {
                 try {
 					JSONObject arg_object = args.getJSONObject(0);
                     String appId = arg_object.getString("App_ID");
                     String clientKey = arg_object.getString("Client_Key");
                     Parse.initialize(cordova.getActivity(), appId, clientKey);
+					PushService.setDefaultPushCallback(cordova.getActivity(), cordova.getActivity().getClass());
                     callbackContext.success();
                 } catch (JSONException e) {
                     callbackContext.error("JSONException");
@@ -52,7 +55,8 @@ public class ParsePushNotification extends CordovaPlugin {
 	
 	private void subscribe(final CallbackContext callbackContext, final JSONArray args) {
         cordova.getThreadPool().execute(new Runnable() {
-            public void run() {
+            @SuppressWarnings("deprecation")
+			public void run() {
                 try {               
 					JSONObject arg_object = args.getJSONObject(0);
 			  		String channel = arg_object.getString("channel");
