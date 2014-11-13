@@ -11,7 +11,7 @@ public class ParsePushNotificationReceiver extends ParsePushBroadcastReceiver {
     @Override
     public void onPushOpen(Context context, Intent intent) {
         Log.e("Push", "Clicked");
-        Log.e("TEST", this.getClass().toString());
+        Log.e("TEST", intent.getClass().toString());
         Log.e("TEST", intent.getPackage());
         Intent i = new Intent(context, this.getClass());
         i.putExtras(intent.getExtras());
