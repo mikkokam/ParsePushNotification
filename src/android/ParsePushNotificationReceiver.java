@@ -13,6 +13,7 @@ public class ParsePushNotificationReceiver extends ParsePushBroadcastReceiver {
         Log.e("Push", "Clicked");
         Log.e("TEST", intent.getClass().toString());
         Log.e("TEST", intent.getPackage());
+		Log.e("TEST",  this.getClass().toString());
         Intent i = new Intent(context, this.getClass());
         i.putExtras(intent.getExtras());
         i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
