@@ -11,7 +11,7 @@ public class ParsePushNotificationReceiver extends ParsePushBroadcastReceiver {
     @Override
     public void onPushOpen(Context context, Intent intent) {
         Log.e("Push", "Clicked");
-        Intent i = new Intent(context, this.getClass());
+        Intent i = new Intent(context, jerry.shen.babyapp.CordovaApp.class);
         i.putExtras(intent.getExtras());
         i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(i);
