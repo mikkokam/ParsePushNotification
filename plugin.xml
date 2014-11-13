@@ -38,7 +38,6 @@
 					<action android:name="com.parse.push.intent.RECEIVE" />
 					<action android:name="com.parse.push.intent.DELETE" />
 					<action android:name="com.parse.push.intent.OPEN" />
-					<category android:name="android.intent.category.LAUNCHER" />
 				</intent-filter>
 			</receiver>
 		</config-file>
