@@ -82,11 +82,8 @@ public class ParsePushNotification extends CordovaPlugin {
     private void getInstallationId(final CallbackContext callbackContext) {
         cordova.getThreadPool().execute(new Runnable() {
             public void run() {
-                try {
-                    String installationId = ParseInstallation.getCurrentInstallation().getInstallationId();
-                    callbackContext.success(installationId);
-                } catch (Exception e) { callbackContext.error("getInstallationId: "+e); }
-               
+                String installationId = ParseInstallation.getCurrentInstallation().getInstallationId();
+                callbackContext.success(installationId);
             }
         });
     }
