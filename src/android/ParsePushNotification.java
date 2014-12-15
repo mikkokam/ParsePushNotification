@@ -107,8 +107,8 @@ public class ParsePushNotification extends CordovaPlugin {
     private void getSubscriptions(final CallbackContext callbackContext) {
         cordova.getThreadPool().execute(new Runnable() {
             public void run() {
-                 Set<String> subscriptions = PushService.getSubscriptions(cordova.getActivity());
-                 callbackContext.success(subscriptions.toString());
+                 String subscriptions = PushService.getSubscriptions(cordova.getActivity()).toString();
+                 callbackContext.success(subscriptions);
             }
         });
     }
