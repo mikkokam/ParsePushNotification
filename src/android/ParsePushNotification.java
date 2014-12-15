@@ -53,6 +53,8 @@ public class ParsePushNotification extends CordovaPlugin {
                     String appId = arg_object.getString("App_ID");
                     String clientKey = arg_object.getString("Client_Key");
                     Parse.initialize(cordova.getActivity(), appId, clientKey);
+                    // PushService.setDefaultPushCallback(cordova.getActivity(), cordova.getActivity().getClass());
+                    ParseInstallation.getCurrentInstallation().saveInBackground();
                     callbackContext.success();
                 } catch (JSONException e) {
                     callbackContext.error("JSONException");
