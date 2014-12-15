@@ -4,7 +4,8 @@ ParsePushNotification
 Parse push notifications for PhoneGap. Android only for now.
 
 **Works on Adobe PhoneGap Build.**
-PGB does not have any in the directory yet.
+
+PGB does not have any Parse Push plugins in the directory yet.
 Most of the plugins fail to upload either because of using a reserved namespace (cordova or phonegap).
 Others can be uploaded, but PGB fails to add them.
 
