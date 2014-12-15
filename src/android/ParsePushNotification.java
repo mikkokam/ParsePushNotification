@@ -8,10 +8,13 @@ import org.json.JSONException;
 
 import com.parse.Parse;
 import com.parse.ParsePush;
+import com.parse.ParseInstallation;
 
 public class ParsePushNotification extends CordovaPlugin {
 	public static final String ACTION_INITIALIZE = "initialize";
-    public static final String ACTION_SUBSCRIBE = "subscribe";
+	public static final String ACTION_SUBSCRIBE = "subscribe";
+    public static final String ACTION_GET_INSTALLATION_ID = "getInstallationId";
+    public static final String ACTION_GET_INSTALLATION_OBJECT_ID = "getInstallationObjectId";	
     public String CHANNEL = "";
     
     @Override
@@ -73,4 +76,24 @@ public class ParsePushNotification extends CordovaPlugin {
             }
         });
     }
+    
+    private void getInstallationId(final CallbackContext callbackContext) {
+        cordova.getThreadPool().execute(new Runnable() {
+            public void run() {
+                String installationId = ParseInstallation.getCurrentInstallation().getInstallationId();
+                callbackContext.success(installationId);
+            }
+        });
+    }
+
+    private void getInstallationObjectId(final CallbackContext callbackContext) {
+        cordova.getThreadPool().execute(new Runnable() {
+            public void run() {
+                String objectId = ParseInstallation.getCurrentInstallation().getObjectId();
+                callbackContext.success(objectId);
+            }
+        });
+    }
+    
+    
 }
