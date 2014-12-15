@@ -45,54 +45,54 @@ public class ParsePushNotification extends CordovaPlugin {
 	}
 	
 	private void initialize(final CallbackContext callbackContext, final JSONArray args) {
-	        cordova.getThreadPool().execute(new Runnable() {
-	    	    @SuppressWarnings("deprecation")
-	    		public void run() {
-		                try {
-					JSONObject arg_object = args.getJSONObject(0);
-		                    	String appId = arg_object.getString("App_ID");
-		                    	String clientKey = arg_object.getString("Client_Key");
-		                    	Parse.initialize(cordova.getActivity(), appId, clientKey);
-		                    	callbackContext.success();
-		                } catch (JSONException e) {
-		                    	callbackContext.error("JSONException");
-		                }
-	        	}
-	        });
+        cordova.getThreadPool().execute(new Runnable() {
+	       @SuppressWarnings("deprecation")
+    		public void run() {
+                try {
+				   JSONObject arg_object = args.getJSONObject(0);
+                	String appId = arg_object.getString("App_ID");
+                	String clientKey = arg_object.getString("Client_Key");
+                	Parse.initialize(cordova.getActivity(), appId, clientKey);
+                	callbackContext.success();
+                } catch (JSONException e) {
+                	callbackContext.error("JSONException");
+                }
+        	}
+        });
 	}
 		
 	private void subscribe(final CallbackContext callbackContext, final JSONArray args) {
-	        cordova.getThreadPool().execute(new Runnable() {
-			    @SuppressWarnings("deprecation")
-			    public void run() {
-		                try {               
+        cordova.getThreadPool().execute(new Runnable() {
+		    @SuppressWarnings("deprecation")
+		    public void run() {
+                try {               
 					JSONObject arg_object = args.getJSONObject(0);
 			  		CHANNEL = arg_object.getString("channel");
 					ParsePush.subscribeInBackground(CHANNEL);
-		                	callbackContext.success();
-		                } catch (JSONException e) {
-		                	    callbackContext.error("JSONException");
-	                    	}
-		    	}
-	    	});
+                	callbackContext.success();
+                } catch (JSONException e) {
+            	   callbackContext.error("JSONException");
+            	}
+	    	}
+    	});
 	}
 	    
 	private void getInstallationId(final CallbackContext callbackContext) {
-	        cordova.getThreadPool().execute(new Runnable() {
-	        	public void run() {
-	            	String installationId = ParseInstallation.getCurrentInstallation().getInstallationId();
-	            	callbackContext.success(installationId);
-	    	    }
-	        });
+        cordova.getThreadPool().execute(new Runnable() {
+        	public void run() {
+            	String installationId = ParseInstallation.getCurrentInstallation().getInstallationId();
+            	callbackContext.success(installationId);
+    	    }
+        });
 	}
 	
 	private void getInstallationObjectId(final CallbackContext callbackContext) {
-	    	cordova.getThreadPool().execute(new Runnable() {
-	    		public void run() {
-	            	String objectId = ParseInstallation.getCurrentInstallation().getObjectId();
-	            	callbackContext.success(objectId);
-	        	}
-	        });
+    	cordova.getThreadPool().execute(new Runnable() {
+    		public void run() {
+            	String objectId = ParseInstallation.getCurrentInstallation().getObjectId();
+            	callbackContext.success(objectId);
+        	}
+        });
 	}
-   
+
 }
