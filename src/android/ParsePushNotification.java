@@ -8,6 +8,7 @@ import org.json.JSONException;
 
 import com.parse.Parse;
 import com.parse.ParsePush;
+import com.parse.PushService;
 import com.parse.ParseInstallation;
 
 
@@ -27,7 +28,7 @@ public class ParsePushNotification extends CordovaPlugin {
                 return true;
             }
             if (ACTION_SUBSCRIBE.equals(action)) {
-                this.subscribe(callbackContext, args);
+                this.subscribe(args.getString(0), callbackContext);
                 return true;
             }
             if (ACTION_GET_SUBSCRIPTIONS.equals(action)) {
@@ -35,7 +36,7 @@ public class ParsePushNotification extends CordovaPlugin {
                 return true;
             }
             if (ACTION_UNSUBSCRIBE.equals(action)) {
-                this.unsubscribe(callbackContext, args);
+                this.unsubscribe(args.getString(0), callbackContext);
                 return true;
             }
             if (ACTION_GET_INSTALLATION_ID.equals(action)) {
@@ -56,12 +57,12 @@ public class ParsePushNotification extends CordovaPlugin {
         } 
     }
     
-    @Override
-    public void onDestroy() {
-        // TODO Auto-generated method stub
-        ParsePush.unsubscribeInBackground(CHANNEL);
-        super.onDestroy();
-    }
+    // @Override
+    // public void onDestroy() {
+    //     // TODO Auto-generated method stub
+    //     ParsePush.unsubscribeInBackground(CHANNEL);
+    //     super.onDestroy();
+    // }
     
     private void initialize(final CallbackContext callbackContext, final JSONArray args) {
         cordova.getThreadPool().execute(new Runnable() {
@@ -72,7 +73,7 @@ public class ParsePushNotification extends CordovaPlugin {
                     String appId = arg_object.getString("App_ID");
                     String clientKey = arg_object.getString("Client_Key");
                     Parse.initialize(cordova.getActivity(), appId, clientKey);
-                    // PushService.setDefaultPushCallback(cordova.getActivity(), cordova.getActivity().getClass());
+                    PushService.setDefaultPushCallback(cordova.getActivity(), cordova.getActivity().getClass());
                     ParseInstallation.getCurrentInstallation().saveInBackground();
                     String installationId = ParseInstallation.getCurrentInstallation().getInstallationId();
                     callbackContext.success(installationId);
@@ -106,7 +107,7 @@ public class ParsePushNotification extends CordovaPlugin {
     private void getSubscriptions(final CallbackContext callbackContext) {
         cordova.getThreadPool().execute(new Runnable() {
             public void run() {
-                 String subscriptions = ParsePush.getSubscriptions(cordova.getActivity());
+                 Set<String> subscriptions = PushService.getSubscriptions(cordova.getActivity());
                  callbackContext.success(subscriptions.toString());
             }
         });
@@ -114,7 +115,7 @@ public class ParsePushNotification extends CordovaPlugin {
     private void subscribe(final String channel, final CallbackContext callbackContext) {
         cordova.getThreadPool().execute(new Runnable() {
             public void run() {
-                ParsePush.subscribeInBackground(channel);
+                PushService.subscribe(cordova.getActivity(), channel, cordova.getActivity().getClass());
                 callbackContext.success();
             }
         });
@@ -123,7 +124,7 @@ public class ParsePushNotification extends CordovaPlugin {
     private void unsubscribe(final String channel, final CallbackContext callbackContext) {
         cordova.getThreadPool().execute(new Runnable() {
             public void run() {
-                ParsePush.unsubscribe(cordova.getActivity(), channel);
+                PushService.unsubscribe(cordova.getActivity(), channel);
                 callbackContext.success();
             }
         });
