@@ -28,11 +28,13 @@ if(window.parsePushNotification){
         },
         function(data){
             // SUCCESS
-            console.log("PUSH initialize success");console.log(data)
+            console.log("PUSH initialize success");
+            console.log(data); // data is the installation ID
         },
         function(data){
             // FAIL
-            console.log("PUSH initialize error");console.log(data)
+            console.log("PUSH initialize error");
+            console.log(data);
         }
     );
 }
@@ -41,7 +43,18 @@ if(window.parsePushNotification){
 This will register your device
   
   
-Likewise, use window.parsePushNotification.subscribe to subscribe channels.
-  
-The code needs a bit of modifications -  and misses some Parse Push functions / to be added.
-iOS is not on the list until later.
+Likewise / check the javascript - comments and examples later:
+TESTED (should be OK):
+window.parsePushNotification.getInstallationId
+window.parsePushNotification.getInstallationObjectId
+
+UNTESTED (work in progress):
+window.parsePushNotification.subscribe
+window.parsePushNotification.getSubscriptions
+window.parsePushNotification.unsubscribe
+
+
+
+The code needs a bit of modifications -  and missed some Parse Push functions / adding them here.
+
+iOS is on the todo-list later.
