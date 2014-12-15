@@ -48,12 +48,15 @@ Likewise / check the javascript - comments and examples later:
 **TESTED (should be OK):**
 
 window.parsePushNotification.getInstallationId
+
 window.parsePushNotification.getInstallationObjectId
 
 **UNTESTED (work in progress):**
 
 window.parsePushNotification.subscribe
+
 window.parsePushNotification.getSubscriptions
+
 window.parsePushNotification.unsubscribe
 
 
