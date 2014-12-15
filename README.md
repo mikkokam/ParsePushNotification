@@ -12,11 +12,13 @@ Others can be uploaded, but PGB fails to add them.
 Forked this as this was one of the only ones I managed to upload and use.
 
 **Install**
+
 Do not download anything from here. Copy the repo link and use it at "Your plugins" in Adobe PhoneGap Build. After uploading, you get the line (with the name):
 `<gap:plugin name="**name**" version="0.1.0" />`
 Add it to your config.xml.
 
 In your javascript:
+
 ```
 if(window.parsePushNotification){
     window.parsePushNotification.initialize(
@@ -35,6 +37,7 @@ if(window.parsePushNotification){
     );
 }
 ```
+
 This will register your device
   
   
