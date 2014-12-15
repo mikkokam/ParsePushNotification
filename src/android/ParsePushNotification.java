@@ -67,7 +67,7 @@ public class ParsePushNotification extends CordovaPlugin {
         cordova.getThreadPool().execute(new Runnable() {
             @SuppressWarnings("deprecation")
             public void run() {
-                try {               
+                try {
                     JSONObject arg_object = args.getJSONObject(0);
                     CHANNEL = arg_object.getString("channel");
                     ParsePush.subscribeInBackground(CHANNEL);
@@ -82,8 +82,11 @@ public class ParsePushNotification extends CordovaPlugin {
     private void getInstallationId(final CallbackContext callbackContext) {
         cordova.getThreadPool().execute(new Runnable() {
             public void run() {
-                String installationId = ParseInstallation.getCurrentInstallation().getInstallationId();
-                callbackContext.success(installationId);
+                try {
+                    String installationId = ParseInstallation.getCurrentInstallation().getInstallationId();
+                    callbackContext.success(installationId);
+                } catch (Exception e) { callbackContext.error("getInstallationId: "+e); }
+               
             }
         });
     }
