@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<plugin xmlns="http://www.phonegap.com/ns/plugins/1.0" id="jerry.shen.plugin.ParsePushNotification" version="0.2.0">
+<plugin xmlns="http://www.phonegap.com/ns/plugins/1.0" id="jerry.shen.plugin.ParsePushNotification" version="0.2.1">
     <name>ParsePushNotification</name>
     <description>ParsePushNotification</description>
     <license>MIT</license>
