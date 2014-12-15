@@ -10,6 +10,27 @@ var parsePushNotification = {
 			'channel': param.channel
 		}]);
     }
+    getInstallationId: function(successCallback, errorCallback) {
+        cordova.exec(
+            successCallback,
+            errorCallback,
+            'ParsePushNotification',
+            'getInstallationId',
+            []
+        );
+    },
+
+    getInstallationObjectId: function(successCallback, errorCallback) {
+        cordova.exec(
+            successCallback,
+            errorCallback,
+            'ParsePushNotification',
+            'getInstallationObjectId',
+            []
+        );
+    },    
+    
+    
 };
 
 module.exports = parsePushNotification;
