@@ -1,5 +1,5 @@
 var parsePushNotification = {
-	
+
     initialize: function(param, successCallback, errorCallback) {
         cordova.exec(successCallback, errorCallback, 'ParsePushNotification', 'initialize',[{
             App_ID: param.App_ID,
@@ -7,10 +7,28 @@ var parsePushNotification = {
         }]);
     },
 
-    subscribe: function(param, successCallback, errorCallback) {
-        cordova.exec(successCallback, errorCallback, 'ParsePushNotification', 'subscribe',[{
-        'channel': param.channel
-    }]);
+    getSubscriptions: function(successCallback, errorCallback) {
+        cordova.exec(successCallback, errorCallback,
+            'ParsePushNotification',
+            'getSubscriptions',
+            []
+        );
+    },
+
+    subscribe: function(channel, successCallback, errorCallback) {
+        cordova.exec(successCallback, errorCallback,
+            'ParsePushNotification',
+            'subscribe',
+            [ channel ]
+        );
+    },
+
+    unsubscribe: function(channel, successCallback, errorCallback) {
+        cordova.exec(successCallback, errorCallback,
+            'ParsePushNotification',
+            'unsubscribe',
+            [ channel ]
+        );
     },
 
     getInstallationId: function(successCallback, errorCallback) {

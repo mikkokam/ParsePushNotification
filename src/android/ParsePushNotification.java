@@ -10,12 +10,14 @@ import com.parse.Parse;
 import com.parse.ParsePush;
 import com.parse.ParseInstallation;
 
+
 public class ParsePushNotification extends CordovaPlugin {
     public static final String ACTION_INITIALIZE = "initialize";
     public static final String ACTION_SUBSCRIBE = "subscribe";
+    public static final String ACTION_GET_SUBSCRIPTIONS = "getSubscriptions";
+    public static final String ACTION_UNSUBSCRIBE = "unsubscribe";    
     public static final String ACTION_GET_INSTALLATION_ID = "getInstallationId";
-    public static final String ACTION_GET_INSTALLATION_OBJECT_ID = "getInstallationObjectId";    
-    public String CHANNEL = "";
+    public static final String ACTION_GET_INSTALLATION_OBJECT_ID = "getInstallationObjectId";
     
     @Override
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
@@ -28,6 +30,23 @@ public class ParsePushNotification extends CordovaPlugin {
                 this.subscribe(callbackContext, args);
                 return true;
             }
+            if (ACTION_GET_SUBSCRIPTIONS.equals(action)) {
+                this.getSubscriptions(callbackContext);
+                return true;
+            }
+            if (ACTION_UNSUBSCRIBE.equals(action)) {
+                this.unsubscribe(callbackContext, args);
+                return true;
+            }
+            if (ACTION_GET_INSTALLATION_ID.equals(action)) {
+                this.getInstallationId(callbackContext);
+                return true;
+            }
+            if (ACTION_GET_INSTALLATION_OBJECT_ID.equals(action)) {
+                this.getInstallationObjectId(callbackContext);
+                return true;
+            }
+
             callbackContext.error("Invalid action");
             return false;
         } catch(Exception e) {
@@ -64,21 +83,7 @@ public class ParsePushNotification extends CordovaPlugin {
         });
     }
         
-    private void subscribe(final CallbackContext callbackContext, final JSONArray args) {
-        cordova.getThreadPool().execute(new Runnable() {
-            @SuppressWarnings("deprecation")
-            public void run() {
-                try {
-                    JSONObject arg_object = args.getJSONObject(0);
-                    CHANNEL = arg_object.getString("channel");
-                    ParsePush.subscribeInBackground(CHANNEL);
-                    callbackContext.success();
-                } catch (JSONException e) {
-                   callbackContext.error("JSONException");
-                }
-            }
-        });
-    }
+ 
         
     private void getInstallationId(final CallbackContext callbackContext) {
         cordova.getThreadPool().execute(new Runnable() {
@@ -97,5 +102,31 @@ public class ParsePushNotification extends CordovaPlugin {
             }
         });
     }
+
+    private void getSubscriptions(final CallbackContext callbackContext) {
+        cordova.getThreadPool().execute(new Runnable() {
+            public void run() {
+                 String subscriptions = ParsePush.getSubscriptions(cordova.getActivity());
+                 callbackContext.success(subscriptions.toString());
+            }
+        });
+    }
+    private void subscribe(final String channel, final CallbackContext callbackContext) {
+        cordova.getThreadPool().execute(new Runnable() {
+            public void run() {
+                ParsePush.subscribeInBackground(channel);
+                callbackContext.success();
+            }
+        });
+    }       
+
+    private void unsubscribe(final String channel, final CallbackContext callbackContext) {
+        cordova.getThreadPool().execute(new Runnable() {
+            public void run() {
+                ParsePush.unsubscribe(cordova.getActivity(), channel);
+                callbackContext.success();
+            }
+        });
+    }    
 
 }
