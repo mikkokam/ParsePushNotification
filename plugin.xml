@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<plugin xmlns="http://www.phonegap.com/ns/plugins/1.0" id="jerry.shen.plugin.ParsePushNotification" version="0.2.2">
+<plugin xmlns="http://www.phonegap.com/ns/plugins/1.0" id="jerry.shen.plugin.ParsePushNotification" version="0.2.3">
     <name>ParsePushNotification</name>
     <description>ParsePushNotification</description>
     <license>MIT</license>
@@ -20,7 +20,7 @@
         </config-file>
         <config-file target="AndroidManifest.xml" parent="/manifest/application">
             <service android:name="com.parse.PushService" />
-            <receiver android:name="com.parse.ParseBroadcastReceiver">
+            <receiver android:name="com.parse.ParseBroadcastReceiver" android:exported="false">
                 <intent-filter>
                     <action android:name="android.intent.action.BOOT_COMPLETED" />
                     <action android:name="android.intent.action.USER_PRESENT" />
