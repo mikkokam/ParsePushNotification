@@ -107,15 +107,15 @@ public class ParsePushNotification extends CordovaPlugin {
     private void getSubscriptions(final CallbackContext callbackContext) {
         cordova.getThreadPool().execute(new Runnable() {
             public void run() {
-                 String subscriptions = PushService.getSubscriptions(cordova.getActivity()).toString();
-                 callbackContext.success(subscriptions);
+                 String subscriptions = ParseInstallation.getCurrentInstallation().getList("channels");
+                callbackContext.success(subscriptions.toString());
             }
         });
     }
     private void subscribe(final String channel, final CallbackContext callbackContext) {
         cordova.getThreadPool().execute(new Runnable() {
             public void run() {
-                PushService.subscribe(cordova.getActivity(), channel, cordova.getActivity().getClass());
+                ParsePush.subscribeInBackground(channel);
                 callbackContext.success();
             }
         });
@@ -124,7 +124,7 @@ public class ParsePushNotification extends CordovaPlugin {
     private void unsubscribe(final String channel, final CallbackContext callbackContext) {
         cordova.getThreadPool().execute(new Runnable() {
             public void run() {
-                PushService.unsubscribe(cordova.getActivity(), channel);
+                ParsePush.unsubscribeInBackground(channel);
                 callbackContext.success();
             }
         });
