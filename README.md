@@ -1,3 +1,13 @@
+DEPRECEATED.
+============
+
+DO NOT USE THIS ONE.
+Try the other one below - managed to get that working with all the features.
+
+https://github.com/mikkokam/parse-push-plugin
+
+
+
 ParsePushNotification
 ============
 
